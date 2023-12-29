@@ -9,18 +9,18 @@ const data = {
 
 export default function Nav() {
   const [isClick, setIsClick] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const handleClick = () => {
     setIsClick(!isClick);
   };
 
   return (
     <>
-      <nav className='bg-[#fff] w-full flex items-center justify-between px-5 py-2'>
+      <nav className='bg-[#fff] w-full flex items-center justify-between px-5 py-2 drop-shadow-md '>
         <span className='text-2xl font-nunito font-bold text-[#012970]'>
           Dspmu attendence
         </span>
-        <div className='flex items-center justify-center gap-8'>
+        <div className='flex items-center justify-center gap-8 '>
           {!isLogin ? " " : <OnLogin />}
         </div>
       </nav>
