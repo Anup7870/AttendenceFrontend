@@ -17,24 +17,25 @@ export default function Login() {
           department of Dr. Shyama Prasad Mukherjee University Ranchi
         </p>
       </section>
-      <section className='flex-1 flex W-[55%] md:w-[100%] h-main items-center justify-center '>
-        <form action='' className='bg-[#fff] w-[80%] m-auto'>
-          <div className='p p-10'>
+      <section className='flex-1 flex lg:W-[55%] md:w-[100%] sm:w-full h-main items-center justify-center '>
+        <form action='' className='bg-[#fff] w-[80%] md:w-[70%] m-auto'>
+          <div className='p-10 sm:p-5 md:p-5 w-full'>
             <RadioGroup
               aria-labelledby='demo-controlled-radio-buttons-group'
               name='controlled-radio-buttons-group'
               value={value}
               onChange={(data) => console.log(data.target.value)}>
-              <div className='flex gap-16'>
+              <div className='flex gap-16 lg:gap-16 md:gap-16 sm:gap-5 w-full '>
                 <FormControlLabel
-                  className='a w-[40%] px-1 py-2 border border-[#5F6EF1] bg-[#F0F4FB] rounded-lg m-0'
+                
+                  className=' w-[40%]  px-1 py-2 border border-[#5F6EF1] bg-[#F0F4FB] rounded-lg m-0'
                   value='teacher'
                   control={<Radio />}
                   label='Teacher'
                   onClick={() => setValue("teacher")}
                 />
                 <FormControlLabel
-                  className='p  w-[40%] px-1 py-2 border border-[#5F6EF1] bg-[#F0F4FB] rounded-lg'
+                  className='  w-[40%] px-1  py-2 border border-[#5F6EF1] bg-[#F0F4FB] rounded-lg md:text-sm sm:text-sm m-0'
                   value='admin'
                   control={<Radio />}
                   label='Admins'

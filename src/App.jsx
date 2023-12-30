@@ -7,7 +7,7 @@ import Login from "./components/Login";
 import Main from "./Pages/Main";
 function App() {
   const [count, setCount] = useState(0);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   return (
     <>
       <div className='w-screen h-screen md:h-screen md:w-screen bg-[#EDF1F7] overflow-auto'>
