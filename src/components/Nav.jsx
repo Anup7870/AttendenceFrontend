@@ -1,15 +1,11 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
-import { useState } from "react";
-
-
-const data = {
-  name: "Anup",
-};
+import { useState,useContext } from "react";
+import Context from "../Context";
 
 export default function Nav() {
   const [isClick, setIsClick] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const context = useContext(Context);
   const handleClick = () => {
     setIsClick(!isClick);
   };
@@ -21,7 +17,7 @@ export default function Nav() {
           Dspmu attendence
         </span>
         <div className='flex items-center justify-center gap-8 '>
-          {!isLogin ? " " : <OnLogin />}
+          {!context.login ? " " : <OnLogin />}
         </div>
       </nav>
     </>
@@ -30,10 +26,12 @@ export default function Nav() {
 
 
 const OnLogin = () => {
+  const context = useContext(Context);
+  const name = context.user.name;
   return (
     <>
-      <p>{data.name}</p>
-      <Avatar alt={data.name} src='src/assets/downlaod.jpg' />
+      <p>{name}</p>
+      <Avatar alt={name} src='src/assets/downlaod.jpg' />
     </>
   );
 };

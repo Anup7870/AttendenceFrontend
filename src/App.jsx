@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Scanner from "./components/Scanner";
 import { Route, Routes } from "react-router-dom";
@@ -7,7 +7,8 @@ import Login from "./components/Login";
 import Attendence from "./components/Attendence";
 import Sidenav from "./components/Sidenav";
 import View from "./components/View";
-
+import { useContext } from "react";
+import Context from "./Context";
 //components not main function
 const Main = ()=>{
   return (
@@ -32,11 +33,20 @@ const Main = ()=>{
 function App() {
   const [count, setCount] = useState(0);
   const [isLogin, setIsLogin] = useState(false);
+  const context = useContext(Context);
+  useEffect(() => {
+    if (localStorage.getItem("login") === "true") {
+      context.setLogin(true);
+    }
+    else{
+      context.setLogin(false);
+    }
+  },[])
   return (
     <>
       <div className='w-screen h-screen md:h-screen md:w-screen bg-[#EDF1F7] overflow-auto'>
         <Nav />
-        {isLogin? <Main/>:<Login/>}
+        {context.login? <Main/>:<Login/>}
       </div>
     </>
   );

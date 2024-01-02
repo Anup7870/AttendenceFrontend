@@ -1,12 +1,39 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import logo from "../assets/logo.png";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
+import axios from "axios";
+import Context from "../Context";
 export default function Login() {
-  const [value, setValue] = useState("");
+  const [user, setUser] = useState("");
+  const context = useContext(Context);
+  const [data,setData]= useState({
+    userId:"",
+    password:"",
+  })
+  const login = async (e)=>{
+    e.preventDefault();
+    if(user==="teacher"){
+      console.log("teacher",data)
+      const api = await axios.post("http://localhost:3000/teacher/auth",data);
+      // api.status===200?context.setLogin(true); context.setUser(api.data):context.setLogin(true);
+      if(api.status===200){
+        context.setLogin(true);
+        context.setUser(api.data.data);
+        console.log(context.user);
+        localStorage.setItem("login",true);
+      }
+      else{
+        context.setLogin(false);
+      }
+      console.log(api)
+      console.log(context.login);
+    }
+  }
+
   return (
     <main className='w-full h-main flex flex-col md:flex-row md:items-center'>
       <section className='lg:w-[45%]  pl-2 h-main flex items-center flex-col  justify-center'>
@@ -23,22 +50,22 @@ export default function Login() {
             <RadioGroup
               aria-labelledby='demo-controlled-radio-buttons-group'
               name='controlled-radio-buttons-group'
-              value={value}
-              onChange={(data) => console.log(data.target.value)}>
+              value={user}
+              onChange={(data) =>setUser(data.target.value)}>
               <div className='flex gap-16 lg:gap-16 md:gap-16 sm:gap-5 w-full '>
                 <FormControlLabel
                   className=' w-[40%]  px-1 py-2 border border-[#5F6EF1] bg-[#F0F4FB] rounded-lg m-0'
                   value='teacher'
                   control={<Radio />}
                   label='Teacher'
-                  onClick={() => setValue("teacher")}
+                  
                 />
                 <FormControlLabel
                   className='  w-[40%] px-1  py-2 border border-[#5F6EF1] bg-[#F0F4FB] rounded-lg md:text-sm sm:text-sm m-0'
                   value='admin'
                   control={<Radio />}
                   label='Admins'
-                  onClick={() => setValue("admin")}
+                  
                 />
               </div>
             </RadioGroup>
@@ -47,6 +74,7 @@ export default function Login() {
               <input
                 type='text'
                 className='w-full outline-none pl-3 border h-10 border-[#CED4DA] rounded-lg mt-2'
+                onChange={(e)=>setData({...data,userId:e.target.value})}
               />
             </div>
             <div className='mt-5 '>
@@ -54,6 +82,7 @@ export default function Login() {
               <input
                 type='password'
                 className='w-full outline-none pl-3 h-10 border border-[#CED4DA] rounded-lg mt-2'
+                onChange={(e)=>setData({...data,password:e.target.value})}
               />
             </div>
             <div className='grid grid-flow-row mt-5'>
@@ -67,7 +96,9 @@ export default function Login() {
                 sx={{
                   marginTop: "1.5rem",
                   widht: "30%",
-                }}>
+                }}
+                onClick={login}
+                >
                 sign in
               </Button>
             </div>
