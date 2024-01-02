@@ -1,24 +1,44 @@
-import React from 'react'
-// import {AutoStoriesOutlinedIcon} from '@mui/icons-material/AutoStoriesOutlined';
-// import {GradingOutlinedIcon} from '@mui/icons-material/GradingOutlined';
-// import {LogoutOutlinedIcon} from '@mui/icons-material/LogoutOutlined';
+import React from "react";
+import { FaBook } from "react-icons/fa6";
+import { FaBookOpenReader } from "react-icons/fa6";
+import { BiLogInCircle } from "react-icons/bi";
+import { useState } from "react";
+import classNames from "classnames";
+import { Link } from "react-router-dom";
 export default function Sidenav() {
+  const [opt, setopt] = useState(true);
+  const bag = classNames({
+    "flex items-center": true,
+    " gap-1": true,
+    "py-3 ": true,
+    "cursor-pointer": true,
+  });
   return (
-    <div className=''>
+    <div className='w-full'>
       <ul>
-        <li>
-          {/* <AutoStoriesOutlinedIcon/> */}
-          <p>Make Attendence</p>
-        </li>
-        <li>
-          {/* <GradingOutlinedIcon/> */}
-          <p>View Attendence</p>
-        </li>
-        <li>
-          {/* <LogoutOutlinedIcon/> */}
-          <p>Logout</p>
+        <Link to='/'>
+          <li className={bag}>
+            <FaBook/>
+            <p className='text-center w-full caret-transparent text-sm'>
+              Make Attendence
+            </p>
+          </li>
+        </Link>
+        <Link to='/view'>
+          <li className='flex items-center justify-between py-3 cursor-pointer '>
+            <FaBookOpenReader />
+            <p className='text-center w-full caret-transparent text-sm'>
+              View Attendence
+            </p>
+          </li>
+        </Link>
+        <li className='flex  items-center justify-between py-3 cursor-pointer '>
+          <BiLogInCircle />
+          <p className='text-center w-full outline-none caret-transparent text-sm'>
+            Logout
+          </p>
         </li>
       </ul>
     </div>
-  )
+  );
 }

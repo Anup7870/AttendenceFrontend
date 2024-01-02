@@ -27,7 +27,6 @@ export default function Login() {
               onChange={(data) => console.log(data.target.value)}>
               <div className='flex gap-16 lg:gap-16 md:gap-16 sm:gap-5 w-full '>
                 <FormControlLabel
-                
                   className=' w-[40%]  px-1 py-2 border border-[#5F6EF1] bg-[#F0F4FB] rounded-lg m-0'
                   value='teacher'
                   control={<Radio />}
@@ -57,7 +56,7 @@ export default function Login() {
                 className='w-full outline-none pl-3 h-10 border border-[#CED4DA] rounded-lg mt-2'
               />
             </div>
-            <div className="grid grid-flow-row mt-5">
+            <div className='grid grid-flow-row mt-5'>
               <FormControlLabel
                 control={<Checkbox defaultChecked />}
                 label='Remember me'
@@ -67,7 +66,7 @@ export default function Login() {
                 size='medium'
                 sx={{
                   marginTop: "1.5rem",
-                  widht:"30%"
+                  widht: "30%",
                 }}>
                 sign in
               </Button>
