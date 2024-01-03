@@ -9,6 +9,7 @@ import Sidenav from "./components/Sidenav";
 import View from "./components/View";
 import { useContext } from "react";
 import Context from "./Context";
+import axios from "axios";
 //components not main function
 const Main = ()=>{
   return (
@@ -29,25 +30,24 @@ const Main = ()=>{
 
 // main function
 
-
+ 
 function App() {
   const [count, setCount] = useState(0);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const context = useContext(Context);
-  useEffect(() => {
-    if (localStorage.getItem("login") === "true") {
+  console.log(context.login);
+  useEffect(()=>{
+    if(localStorage.getItem("login")==="true"){
       context.setLogin(true);
+      
     }
-    else{
-      context.setLogin(false);
-    }
-  },[])
+    else context.setLogin(false)
+  })
   return (
     <>
       <div className='w-screen h-screen md:h-screen md:w-screen bg-[#EDF1F7] overflow-auto'>
         <Nav />
-        {/* {context.login? <Main/>:<Login/>} */}
-        {isLogin? <Main/>:<Login/>}
+        {context.login? <Main/>:<Login/>}
       </div>
     </>
   );

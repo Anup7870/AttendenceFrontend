@@ -27,7 +27,7 @@ export default function Nav() {
 
 const OnLogin = () => {
   const context = useContext(Context);
-  const name = context.user.name;
+  const name = context.user?context.user.name:" ";
   return (
     <>
       <p>{name}</p>

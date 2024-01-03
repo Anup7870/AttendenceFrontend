@@ -1,6 +1,7 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import QrReader from 'react-qr-scanner'
 import { useState } from 'react'
+import axios from 'axios';
   const previewStyle = {
     height: 240,
     width: 380,
@@ -15,6 +16,9 @@ export default function Scanner() {
     e.preventDefault();
     setIsopen(()=>isopen?false:true);
   }
+  // useEffect(()=>{
+  //   const api = axios.post("http://localhost:3000/add/:year").then(()=>{})
+  // },[data])
   return (
     <div className='w-[40%]   px-3 flex items-center justify-center flex-col'>
       <QrReader
@@ -22,7 +26,7 @@ export default function Scanner() {
           delay={500}
           style={previewStyle}
           onError={(err)=>console.error(err)}
-          // onScan={(data)=>console.log(data)}
+          onScan={(data)=>setData(data.text)}
           />
           {/* hii scanner */}
         <p>{data}</p>

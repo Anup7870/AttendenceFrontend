@@ -23,7 +23,8 @@ export default function Login() {
       if(api.status===200){
         context.setLogin(true);
         context.setUser(api.data.data);
-        console.log(context.user);
+        context.setLogin(true);
+        // console.log(context.user);
         localStorage.setItem("login",true);
       }
       else{

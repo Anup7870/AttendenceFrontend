@@ -11,31 +11,31 @@ export default function Display() {
       </nav>
       <hr className="mt-1" />
       <div className="w-full overflow-auto">
-      <div className="grid grid-cols-4 text-center mt-3 mt-3">
+      <div className="grid grid-cols-4 text-center  mt-3">
         <span className="truncate">md saif alammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm </span>
         <span className="truncate">21b520973</span>
         <span className="truncate">dspmu2021001175</span>
         <span className="truncate">100%</span>
       </div>
-      <div className="grid grid-cols-4 text-center mt-3 mt-3">
+      <div className="grid grid-cols-4 text-center  mt-3">
         <span>Name </span>
         <span>Roll</span>
         <span>Reg</span>
         <span>percentage</span>
       </div>
-      <div className="grid grid-cols-4 text-center mt-3 mt-3">
+      <div className="grid grid-cols-4 text-center  mt-3">
         <span>Name </span>
         <span>Roll</span>
         <span>Reg</span>
         <span>percentage</span>
       </div>
-      <div className="grid grid-cols-4 text-center mt-3 mt-3">
+      <div className="grid grid-cols-4 text-center  mt-3">
         <span>Name </span>
         <span>Roll</span>
         <span>Reg</span>
         <span>percentage</span>
       </div>
-      <div className="grid grid-cols-4 text-center mt-3 mt-3">
+      <div className="grid grid-cols-4 text-center  mt-3">
         <span>Name </span>
         <span>Roll</span>
         <span>Reg</span>

@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Scanner from "./Scanner";
 import { useState } from "react";
 import { Context } from "../Context";
 import { useContext } from "react";
 import Display from "./Display";
+import axios from "axios";
 
 export default function Attendence() {
   const item = useContext(Context);
   console.log(item.user); // context api
-  const opt = ["21-24", "22-25", "25-27"];
-  
+  // const opt = ["21-24", "22-25", "25-27"];
+  const [opt, setOpt] = useState([]);
+  useEffect(() => {
+    const api = axios
+      .get("http://localhost:3000/add/year")
+      .then((data) => {
+        // console.log(data.data.data.toArray());
+        setOpt(data.data.data);
+        console.log(opt);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div className='w-full h-full pl-3 pt-3'>
@@ -24,8 +35,8 @@ export default function Attendence() {
             <div>
               <select className='h-9 border border-[#CED4DA] rounded-[0.4rem] outline-none w-full'>
                 {/* <option selected>Ple</option> */}
-                {opt.map((item) => (
-                  <option key={item}>{item}</option>
+                {opt&&opt.map((item) => (
+                  <option key={item._id}>{item.year}</option>
                 ))}
               </select>
             </div>
@@ -34,9 +45,14 @@ export default function Attendence() {
             <span>Semester</span>
             <div>
               <select class='h-9 border border-[#CED4DA] rounded-[0.4rem] outline-none w-full'>
-                {opt.map((item) => (
-                  <option key={item}>{item}</option>
-                ))}
+                  <option >1</option>
+                  <option >2</option>
+                  <option >3</option>
+                  <option >4</option>
+                  <option >5</option>
+                  <option >6</option>
+                  <option >7</option>
+                  <option >8</option>
               </select>
             </div>
           </div>
@@ -44,9 +60,9 @@ export default function Attendence() {
             <span>Minutes</span>
             <div>
               <select class='h-9 border border-[#CED4DA] rounded-[0.4rem] outline-none w-full'>
-                <option >5</option>
-                <option >8</option>
-                <option >10</option>
+                <option>5</option>
+                <option>8</option>
+                <option>10</option>
               </select>
             </div>
           </div>
@@ -55,7 +71,7 @@ export default function Attendence() {
           </button>
         </form>
       </div>
-      <div className="w-full flex mt-5 h-[80%]">
+      <div className='w-full flex mt-5 h-[80%]'>
         <Scanner />
         <Display />
         {/* <button>{isopen?"Close camera":"Open camera"}</button> */}
