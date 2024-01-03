@@ -32,7 +32,7 @@ const Main = ()=>{
 
 function App() {
   const [count, setCount] = useState(0);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const context = useContext(Context);
   useEffect(() => {
     if (localStorage.getItem("login") === "true") {
@@ -46,7 +46,8 @@ function App() {
     <>
       <div className='w-screen h-screen md:h-screen md:w-screen bg-[#EDF1F7] overflow-auto'>
         <Nav />
-        {context.login? <Main/>:<Login/>}
+        {/* {context.login? <Main/>:<Login/>} */}
+        {isLogin? <Main/>:<Login/>}
       </div>
     </>
   );

@@ -55,7 +55,7 @@ export default function Attendence() {
           </button>
         </form>
       </div>
-      <div className="w-full flex mt-5 h-[75%]">
+      <div className="w-full flex mt-5 h-[80%]">
         <Scanner />
         <Display />
         {/* <button>{isopen?"Close camera":"Open camera"}</button> */}
