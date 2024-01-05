@@ -7,7 +7,7 @@ import axios from 'axios';
     width: 380,
     marginLeft: "25px",
   };
-export default function Scanner() {
+export default function Scanner({apply,parameter}) {
   const [isopen,setIsopen] = useState(false);
   const [data, setData] = useState('')
   const camera = useRef(true); // for camera button
@@ -16,9 +16,12 @@ export default function Scanner() {
     e.preventDefault();
     setIsopen(()=>isopen?false:true);
   }
-  // useEffect(()=>{
-  //   const api = axios.post("http://localhost:3000/add/:year").then(()=>{})
-  // },[data])
+  console.log(parameter);
+  useEffect(()=>{
+    const data= {...parameter};
+    
+    // const api = axios.post("http://localhost:3000/add/:year").then(()=>{})
+  },[data])
   return (
     <div className='w-[40%]   px-3 flex items-center justify-center flex-col'>
       <QrReader
@@ -26,7 +29,7 @@ export default function Scanner() {
           delay={500}
           style={previewStyle}
           onError={(err)=>console.error(err)}
-          onScan={(data)=>setData(data.text)}
+          onScan={(data)=>{setData(data.text); console.log(data.text)}}
           />
           {/* hii scanner */}
         <p>{data}</p>

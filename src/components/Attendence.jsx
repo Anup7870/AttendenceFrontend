@@ -9,7 +9,15 @@ import axios from "axios";
 export default function Attendence() {
   const item = useContext(Context);
   console.log(item.user); // context api
-  // const opt = ["21-24", "22-25", "25-27"];
+  const [apply,setApply]=useState(false);
+  const [parameter, setParameters] = 
+  useState(
+      {
+        sem: "",
+        year: "",
+        min: "",
+      }
+  );
   const [opt, setOpt] = useState([]);
   useEffect(() => {
     const api = axios
@@ -22,6 +30,11 @@ export default function Attendence() {
       .catch((err) => console.log(err));
   }, []);
 
+  const setQrData = (e) =>{
+    e.preventDefault();
+    setApply(true);
+  }
+
   return (
     <div className='w-full h-full pl-3 pt-3'>
       <nav className='ml-10 mt-2 text-lg font-nunito font-bold'>
@@ -33,46 +46,59 @@ export default function Attendence() {
           <div className='flex flex-col w-[18%]'>
             <span>Session</span>
             <div>
-              <select className='h-9 border border-[#CED4DA] rounded-[0.4rem] outline-none w-full'>
+              <select
+                className='h-9 border border-[#CED4DA] rounded-[0.4rem] outline-none w-full'
+                onChange={(e) =>
+                  setParameters({ ...parameter, year: e.target.value })
+                }>
                 {/* <option selected>Ple</option> */}
-                {opt&&opt.map((item) => (
-                  <option key={item._id}>{item.year}</option>
-                ))}
+                {opt &&
+                  opt.map((item) => (
+                    <option key={item._id}>{item.year}</option>
+                  ))}
               </select>
             </div>
           </div>
           <div className='flex flex-col w-[18%]'>
             <span>Semester</span>
             <div>
-              <select class='h-9 border border-[#CED4DA] rounded-[0.4rem] outline-none w-full'>
-                  <option >1</option>
-                  <option >2</option>
-                  <option >3</option>
-                  <option >4</option>
-                  <option >5</option>
-                  <option >6</option>
-                  <option >7</option>
-                  <option >8</option>
+              <select
+                class='h-9 border border-[#CED4DA] rounded-[0.4rem] outline-none w-full'
+                onChange={(e) =>
+                  setParameters({ ...parameter, sem: e.target.value })
+                }>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
               </select>
             </div>
           </div>
           <div className='flex flex-col w-[18%]'>
             <span>Minutes</span>
             <div>
-              <select class='h-9 border border-[#CED4DA] rounded-[0.4rem] outline-none w-full'>
+              <select
+                class='h-9 border border-[#CED4DA] rounded-[0.4rem] outline-none w-full'
+                onChange={(e) =>
+                  setParameters({ ...parameter, min: e.target.value })
+                }>
                 <option>5</option>
                 <option>8</option>
                 <option>10</option>
               </select>
             </div>
           </div>
-          <button className='bg-[#4154F1] text-white px-3 py-2 rounded-[0.5rem] h-9 mt-6'>
+          <button onClick={()=>setQrData} className='bg-[#4154F1] text-white px-3 py-2 rounded-[0.5rem] h-9 mt-6'>
             Apply
           </button>
         </form>
       </div>
       <div className='w-full flex mt-5 h-[80%]'>
-        <Scanner />
+        <Scanner apply={apply} data={parameter}/>
         <Display />
         {/* <button>{isopen?"Close camera":"Open camera"}</button> */}
       </div>

@@ -18,19 +18,14 @@ export default function Login() {
     e.preventDefault();
     if(user==="teacher"){
       console.log("teacher",data)
-      const api = await axios.post("http://localhost:3000/teacher/auth",data);
-      // api.status===200?context.setLogin(true); context.setUser(api.data):context.setLogin(true);
-      if(api.status===200){
+      const api = await axios.post("http://localhost:3000/teacher/auth",data).then((data)=>{
         context.setLogin(true);
-        context.setUser(api.data.data);
-        context.setLogin(true);
-        // console.log(context.user);
-        localStorage.setItem("login",true);
-      }
-      else{
-        context.setLogin(false);
-      }
-      console.log(api)
+        console.log(data);
+        sessionStorage.setItem("login",true);
+        sessionStorage.setItem("token",data.data.accessToken);
+      }).catch((err)=>{
+        console.log(err)
+      })
       console.log(context.login);
     }
   }
@@ -41,7 +36,7 @@ export default function Login() {
         <img className='w-40 h-40' src={logo} alt='' />
         <h1 className='font-nunito font-bold text-6xl'>Bsc.IT</h1>
         <p className='font-nunito text-xl text-center  mt-5'>
-          This is a Attendence making system by using qr code was by It
+          This is a Attendence making system by using qr code was develop by It
           department of Dr. Shyama Prasad Mukherjee University Ranchi
         </p>
       </section>

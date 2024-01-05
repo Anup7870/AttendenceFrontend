@@ -11,43 +11,46 @@ import { useContext } from "react";
 import Context from "./Context";
 import axios from "axios";
 //components not main function
-const Main = ()=>{
+const Main = () => {
   return (
     <div className='w-full h-main flex  '>
       <section className='w-[15%] bg-white shadow-sha h-full p-8 '>
-        <Sidenav/>
+        <Sidenav />
       </section>
       <section className='w-[84%] h-full'>
-      <Routes>
-          <Route path='/' element={<Attendence/>} />
-          <Route path="/view" element={<View/>}/>
+        <Routes>
+          <Route path='/' element={<Attendence />} />
+          <Route path='/view' element={<View />} />
         </Routes>
       </section>
     </div>
-  )
-  
-}
+  );
+};
 
 // main function
 
- 
 function App() {
-  const [count, setCount] = useState(0);
-  const [isLogin, setIsLogin] = useState(false);
   const context = useContext(Context);
-  console.log(context.login);
-  useEffect(()=>{
-    if(localStorage.getItem("login")==="true"){
+  useEffect(() => {
+    if (sessionStorage.getItem("login") === "true") {
+      const token = "Bearer " + sessionStorage.getItem("token");
+      console.log(token);
+      const api = axios
+        .get("http://localhost:3000/teacher/auth/token", {
+          headers: { Authorization: `${token}` },
+        })
+        .then((data) => {
+          context.setUser(data.data.data);
+          console.log(context.user);
+        });
       context.setLogin(true);
-      
-    }
-    else context.setLogin(false)
-  })
+    } else context.setLogin(false);
+  }, []);
   return (
     <>
       <div className='w-screen h-screen md:h-screen md:w-screen bg-[#EDF1F7] overflow-auto'>
         <Nav />
-        {context.login? <Main/>:<Login/>}
+        {context.login ? <Main /> : <Login />}
       </div>
     </>
   );
