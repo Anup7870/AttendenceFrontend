@@ -6,9 +6,11 @@ export const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [login, setLogin] = useState(false);
   const [attInfo, setAttInfo] = useState({});
+  const [apply,setApply] = useState(false);
+  const [trigger,SetTrigger] = useState(0);
   return (
     <Context.Provider
-      value={{ user, setUser, login, setLogin, attInfo, setAttInfo }}>
+      value={{ user, setUser, login, setLogin, attInfo, setAttInfo,apply,setApply }}>
       {children}
     </Context.Provider>
   );

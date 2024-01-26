@@ -23,6 +23,19 @@ export default function Login() {
         console.log(data);
         sessionStorage.setItem("login",true);
         sessionStorage.setItem("token",data.data.accessToken);
+        if (sessionStorage.getItem("login") === "true") {
+          const token = "Bearer " + sessionStorage.getItem("token");
+          console.log(token);
+          const api = axios
+            .get("http://localhost:3000/teacher/auth/token", {
+              headers: { Authorization: `${token}` },
+            })
+            .then((data) => {
+              context.setUser(data.data.data);
+              console.log(context.user);
+            });
+          context.setLogin(true);
+        } else context.setLogin(false);
       }).catch((err)=>{
         console.log(err)
       })

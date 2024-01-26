@@ -8,24 +8,27 @@ import axios from "axios";
 
 export default function Attendence() {
   const item = useContext(Context);
-  console.log(item.user); // context api
   const [apply,setApply]=useState(false);
+  const [opt, setOpt] = useState([]);
   const [parameter, setParameters] = 
   useState(
       {
-        sem: "",
+        sem: "1",
         year: "",
         min: "",
       }
   );
-  const [opt, setOpt] = useState([]);
+  
   useEffect(() => {
     const api = axios
       .get("http://localhost:3000/add/year")
       .then((data) => {
-        // console.log(data.data.data.toArray());
         setOpt(data.data.data);
-        console.log(opt);
+        setParameters(prevState => ({
+          ...prevState,
+          year: data.data.data[0].year // update year here
+        }));
+        // console.log(opt);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -33,6 +36,7 @@ export default function Attendence() {
   const setQrData = (e) =>{
     e.preventDefault();
     setApply(true);
+    // console.log(apply);
   }
 
   return (
@@ -46,12 +50,12 @@ export default function Attendence() {
           <div className='flex flex-col w-[18%]'>
             <span>Session</span>
             <div>
-              <select
+              <select 
+              defaultValue={parameter.year}
                 className='h-9 border border-[#CED4DA] rounded-[0.4rem] outline-none w-full'
                 onChange={(e) =>
                   setParameters({ ...parameter, year: e.target.value })
                 }>
-                {/* <option selected>Ple</option> */}
                 {opt &&
                   opt.map((item) => (
                     <option key={item._id}>{item.year}</option>
@@ -92,13 +96,13 @@ export default function Attendence() {
               </select>
             </div>
           </div>
-          <button onClick={()=>setQrData} className='bg-[#4154F1] text-white px-3 py-2 rounded-[0.5rem] h-9 mt-6'>
+          <button onClick={setQrData} className='bg-[#4154F1] text-white px-3 py-2 rounded-[0.5rem] h-9 mt-6'>
             Apply
           </button>
         </form>
       </div>
       <div className='w-full flex mt-5 h-[80%]'>
-        <Scanner apply={apply} data={parameter}/>
+        <Scanner parameter={parameter} apply={apply}/>
         <Display />
         {/* <button>{isopen?"Close camera":"Open camera"}</button> */}
       </div>

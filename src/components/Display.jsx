@@ -1,6 +1,13 @@
-import React from "react";
-
+import React, { useContext, useEffect } from "react";
+import Context from "../Context";
+import axios from "axios"
 export default function Display() {
+  const context = useContext(Context);
+  useEffect(()=>{
+    const apiColling = async ()=>{
+      const api = await axios.get(`http://localhost:3000/add//atten/${context.user._id}/:sem/:date/:year`)
+    }
+  },[context.trigger])
   return (
     <div className="w-[60%] bg-[#fff] rounded-lg px-2 pb-1 overflow-auto">
       <nav className="grid grid-cols-4  text-center pt-3 sticky top-0 bg-[#fff] shadow-sha  ">
