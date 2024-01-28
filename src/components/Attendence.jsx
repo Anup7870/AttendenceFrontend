@@ -103,7 +103,7 @@ export default function Attendence() {
       </div>
       <div className='w-full flex mt-5 h-[80%]'>
         <Scanner parameter={parameter} apply={apply}/>
-        <Display />
+        <Display parameter={parameter} />
         {/* <button>{isopen?"Close camera":"Open camera"}</button> */}
       </div>
     </div>

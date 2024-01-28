@@ -1,20 +1,20 @@
-import { useEffect, useState,useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import Html5QrcodePlugin from "./QrPlugin";
 import axios from "axios";
 import Context from "../Context";
 export default function Scanner({ parameter, apply }) {
   const [scanData, setScanData] = useState("");
   const context = useContext(Context);
+
   const addStudent = async (e) => {
     try {
       const api = await axios
         .post(
           `http://localhost:3000/add/makeAttend/${parameter.year}/${parameter.sem}/${context.user._id}`,
-          {  hash: scanData  }
-          
+          { hash: scanData }
         )
         .then((data) => {
-          context.SetTrigger((e)=>e=e+1)
+          context.SetTrigger((e) => (e = e + 1));
           console.log(data);
         });
     } catch (err) {
@@ -33,6 +33,7 @@ export default function Scanner({ parameter, apply }) {
   return (
     <div className='App w-[40%] pr-3'>
       <Html5QrcodePlugin
+        className='w-64 h-64 border border-gray-500'
         fps={10}
         qrbox={250}
         disableFlip={false}
