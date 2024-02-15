@@ -11,13 +11,19 @@ export default function Display({ parameter }) {
     var dia = today.getDate();
     var date = dia + "-" + mes + "-" + years;
     const apiColling = async () => {
-      const api = await axios.get(
-        `http://localhost:3000/add/atten/${context.user._id}/${parameter.sem}/${date}/${parameter.year}`
-      ).then((data) => {
-        // console.log(data.data);
-        setData(data.data)
-        console.log(data);
-      })
+      try{
+        const api = await axios.get(
+          `http://localhost:3000/add/atten/${context.user._id}/${parameter.sem}/${date}/${parameter.year}`
+        ).then((data) => {
+          // console.log(data.data);
+          setData(data.data.data)
+          console.log(data.data.data);
+        })
+      }
+      catch(err){
+        console.log(err);
+      }
+      
     };
     apiColling();
   }, [context.trigger, parameter]);
@@ -31,26 +37,17 @@ export default function Display({ parameter }) {
       </nav>
       <hr className='mt-1' />
       <div className='w-full overflow-auto'>
-        <div className='grid grid-cols-4 text-center  mt-3'>
-          <span className='truncate'>
-            md saif alammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm{" "}
-          </span>
-          <span className='truncate'>21b520973</span>
-          <span className='truncate'>dspmu2021001175</span>
-          <span className='truncate'>100%</span>
-        </div>
-        {data && data.map((item)=>(
-          <div>{item.sem}</div>
-        ))}
-        <div className='grid grid-cols-4 text-center  mt-3'>
-          <span className='truncate'>
-            md saif alammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm{" "}
-          </span>
-          <span className='truncate'>21b520973</span>
-          <span className='truncate'>dspmu2021001175</span>
-          <span className='truncate'>100%</span>
-        </div>
         
+        {data&&data.map(item=>(
+          <div className='grid grid-cols-4 text-center  mt-3'>
+          <span className='truncate'>
+            {item.name}
+          </span>
+          <span className='truncate'>{item.roll}</span>
+          <span className='truncate'>{item.reg}</span>
+          <span className='truncate'>100%</span>
+        </div>
+        ))}
       </div>
     </div>
   );
